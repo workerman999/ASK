@@ -104,26 +104,26 @@ function generate_table_sensors(properties, i) {
     var tbl = document.createElement("table");
     var tblBody = document.createElement("tbody");
 
-        var arrdevice = properties.objects[0].devices[i];
-        var arrsensors = properties.objects[0].devices[i].sensors;
+    var arrdevice = properties.objects[0].devices[i];
+    var arrsensors = properties.objects[0].devices[i].sensors;
 
-        for (k = 0; k < arrsensors.length; k++){
-            var sensors = properties.objects[0].devices[i].sensors[k];
-            var row = document.createElement("tr");
+    for (k = 0; k < arrsensors.length; k++){
+        var sensors = properties.objects[0].devices[i].sensors[k];
+        var row = document.createElement("tr");
 
-            for (var j in sensors) {
-                if ((j == 'conv') || (j == 'id') || (j == 'childs') || (j == 'did')){
-                    continue;
-                } else {
-                    var cell = document.createElement("td");
-                    var cellText = document.createTextNode( j + ' - ' + sensors[j]);
-                    cell.appendChild(cellText);
-                    row.appendChild(cell);
-                }
-
+        for (var j in sensors) {
+            if ((j == 'conv') || (j == 'id') || (j == 'childs') || (j == 'did')){
+                continue;
+            } else {
+                var cell = document.createElement("td");
+                var cellText = document.createTextNode( j + ' - ' + sensors[j]);
+                cell.appendChild(cellText);
+                row.appendChild(cell);
             }
-            tblBody.appendChild(row);
+
         }
+        tblBody.appendChild(row);
+    }
 
     tbl.appendChild(tblBody);
     body.appendChild(tbl);
@@ -143,7 +143,6 @@ function initMap() {
         'dataType': 'json',
         success: function (data) {
             for (i = 0; i < data.objects.length; i++){
-                console.log(data.objects.length);
                 var latvalue = Number(data.objects[i].state['lat']);
                 var lngvalue = Number(data.objects[i].state['lon']);
                 var myLatLng = {lat: latvalue, lng: lngvalue};
